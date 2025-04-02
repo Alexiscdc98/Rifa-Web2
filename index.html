@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rifa Aleatoria</title>
+    <title>Rifa - Registro y Métodos de Pago</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,10 +15,12 @@
             font-size: 16px;
             margin: 5px;
         }
-        #resultado {
-            margin-top: 20px;
-            font-size: 20px;
-            font-weight: bold;
+        .pago-info {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+        #comprobante {
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -32,121 +34,12 @@
     </form>
     <div id="resultado"></div>
 
-    <script>
-        document.getElementById("registroForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            
-            const nombre = document.getElementById("nombre").value;
-            const correo = document.getElementById("correo").value;
-            const telefono = document.getElementById("telefono").value;
-            const numeroAleatorio = Math.floor(Math.random() * 100) + 1;
-
-            document.getElementById("resultado").innerHTML = `
-                <p>${nombre}, tu número es: <strong>${numeroAleatorio}</strong></p>
-                <p>Se enviará un correo de confirmación a: ${correo}</p>
-                <p>Tu número telefónico registrado es: ${telefono}</p>
-            `;
-
-            // Aquí podrías enviar los datos a un servidor para almacenarlos
-        });
-    </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rifa - Métodos de Pago</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            margin: 5px;
-            cursor: pointer;
-        }
-        .pago-info {
-            font-size: 18px;
-            margin: 20px 0;
-        }
-    </style>
-</head>
-<body>
-    <h1>Selecciona tu Método de Pago</h1>
-
-    <div class="pago-info">
-        <p>Pago Móvil (Venezuela)</p>
-        <p>Banco: Ejemplo Banco</p>
-        <p>Cédula: 12345678</p>
-        <p>Teléfono: 0412-1234567</p>
-        <button onclick="confirmarPago('Pago Móvil')">Confirmar Pago</button>
-    </div>
-
-    <div class="pago-info">
-        <p>Binance Pay</p>
-        <button onclick="window.open('https://pay.binance.com/es/', '_blank')">Pagar con Binance</button>
-    </div>
-
-    <div class="pago-info">
-        <p>Zelle</p>
-        <p>Correo: ejemplo@email.com</p>
-        <button onclick="confirmarPago('Zelle')">Confirmar Pago</button>
-    </div>
-
-    <h2>Sube tu comprobante de pago</h2>
-    <form id="pagoForm">
-        <input type="file" id="comprobante" accept="image/*" required>
-        <button type="submit">Enviar Comprobante</button>
-    </form>
-
-    <script>
-        function confirmarPago(metodo) {
-            alert("Has confirmado tu pago con " + metodo + ". Suba su comprobante para completar el registro.");
-        }
-
-        document.getElementById("pagoForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            alert("Comprobante enviado correctamente. ¡Gracias por participar!");
-        });
-    </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rifa - Métodos de Pago</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            margin: 5px;
-            cursor: pointer;
-        }
-        .pago-info {
-            font-size: 18px;
-            margin: 20px 0;
-        }
-    </style>
-</head>
-<body>
-    <h1>Selecciona tu Método de Pago</h1>
+    <h2>Selecciona tu Método de Pago</h2>
 
     <div class="pago-info">
         <p><strong>Pago Móvil (Venezuela)</strong></p>
         <p>Banco: Banco de Venezuela</p>
-        <p>Cédula: 26774947</p>
+        <p>Cédula: V26774947</p>
         <p>Teléfono: 0412-6845069</p>
         <button onclick="confirmarPago('Pago Móvil')">Confirmar Pago</button>
     </div>
@@ -162,13 +55,28 @@
         <button onclick="confirmarPago('Zelle')">Confirmar Pago</button>
     </div>
 
-    <h2>Sube tu captura de pago</h2>
+    <h2>Sube tu comprobante de pago</h2>
     <form id="pagoForm">
         <input type="file" id="comprobante" accept="image/*" required>
         <button type="submit">Enviar Comprobante</button>
     </form>
 
     <script>
+        document.getElementById("registroForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            const nombre = document.getElementById("nombre").value;
+            const correo = document.getElementById("correo").value;
+            const telefono = document.getElementById("telefono").value;
+            const numeroAleatorio = Math.floor(Math.random() * 100) + 1;
+
+            document.getElementById("resultado").innerHTML = `
+                <p>${nombre}, tu número de rifa es: <strong>${numeroAleatorio}</strong></p>
+                <p>Se enviará un correo de confirmación a: ${correo}</p>
+                <p>Tu número telefónico registrado es: ${telefono}</p>
+            `;
+        });
+
         function confirmarPago(metodo) {
             alert("Has confirmado tu pago con " + metodo + ". Ahora sube tu comprobante.");
         }
