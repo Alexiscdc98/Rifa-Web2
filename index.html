@@ -116,3 +116,73 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rifa - Métodos de Pago</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .pago-info {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Selecciona tu Método de Pago</h1>
+
+    <div class="pago-info">
+        <p><strong>Pago Móvil (Venezuela)</strong></p>
+        <p>Banco: Banco de Venezuela</p>
+        <p>Cédula: 26774947</p>
+        <p>Teléfono: 0412-6845069</p>
+        <button onclick="confirmarPago('Pago Móvil')">Confirmar Pago</button>
+    </div>
+
+    <div class="pago-info">
+        <p><strong>Binance Pay</strong></p>
+        <button onclick="window.open('https://pay.binance.com/es/', '_blank')">Pagar con Binance</button>
+    </div>
+
+    <div class="pago-info">
+        <p><strong>Zelle</strong></p>
+        <p>Correo: ejemplo@email.com</p>
+        <button onclick="confirmarPago('Zelle')">Confirmar Pago</button>
+    </div>
+
+    <h2>Sube tu captura de pago</h2>
+    <form id="pagoForm">
+        <input type="file" id="comprobante" accept="image/*" required>
+        <button type="submit">Enviar Comprobante</button>
+    </form>
+
+    <script>
+        function confirmarPago(metodo) {
+            alert("Has confirmado tu pago con " + metodo + ". Ahora sube tu comprobante.");
+        }
+
+        document.getElementById("pagoForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const file = document.getElementById("comprobante").files[0];
+
+            if (file) {
+                alert("Comprobante de pago recibido. ¡Gracias por participar!");
+            } else {
+                alert("Por favor, sube una captura de pantalla del pago.");
+            }
+        });
+    </script>
+</body>
+</html>
