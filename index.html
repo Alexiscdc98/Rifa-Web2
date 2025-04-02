@@ -63,3 +63,64 @@
 
     <h2>Sube tu comprobante de pago</h2>
     <form id="pagoForm">
+        <input type="file" id="comprobante" accept="image/*" required>
+        <button type="submit">Enviar Comprobante</button>
+    </form>
+
+    <script>
+        let numerosDisponibles = Array.from({ length: 100 }, (_, i) => String(i).padStart(2, '0'));
+
+        document.getElementById("registroForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            const nombre = document.getElementById("nombre").value;
+            const cedula = document.getElementById("cedula").value;
+            const telefono = document.getElementById("telefono").value;
+            const correo = document.getElementById("correo").value;
+            const cantidad = parseInt(document.getElementById("cantidad").value);
+            let numeros = [];
+
+            for (let i = 0; i < cantidad; i++) {
+                if (numerosDisponibles.length > 0) {
+                    const indice = Math.floor(Math.random() * numerosDisponibles.length);
+                    numeros.push(numerosDisponibles.splice(indice, 1)[0]);
+                }
+            }
+
+            document.getElementById("resultado").innerHTML = `
+                <p>${nombre}, tus números de rifa son: <strong>${numeros.join(", ")}</strong></p>
+                <p>Cédula registrada: ${cedula}</p>
+                <p>Teléfono registrado: ${telefono}</p>
+                <p>Correo registrado: ${correo}</p>
+            `;
+
+            sessionStorage.setItem(correo, JSON.stringify(numeros));
+        });
+
+        function confirmarPago() {
+            const correo = document.getElementById("correo").value;
+            const numeros = JSON.parse(sessionStorage.getItem(correo));
+
+            if (numeros) {
+                alert(`Pago confirmado. Se enviarán tus números (${numeros.join(", ")}) al correo ${correo}.`);
+                setTimeout(() => {
+                    window.location.href = "https://wa.me/message/G3NGS5445CCUP1";
+                }, 2000);  
+            } else {
+                alert("No se encontró un registro asociado. Asegúrate de haber generado tu número antes de confirmar el pago.");
+            }
+        }
+
+        document.getElementById("pagoForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const file = document.getElementById("comprobante").files[0];
+
+            if (file) {
+                alert("Comprobante de pago recibido. ¡Gracias por participar!");
+            } else {
+                alert("Por favor, sube una captura de pantalla del pago.");
+            }
+        });
+    </script>
+</body>
+</html>
