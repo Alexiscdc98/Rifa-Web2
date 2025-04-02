@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rifa Online - Registro y Pago</title>
+    <title>Brillantez Joyería - Rifa Online</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 50px;
+            background: linear-gradient(to bottom, black, gold);
+            color: white;
         }
         input, button {
             padding: 10px;
@@ -18,14 +20,26 @@
         .pago-info {
             font-size: 18px;
             margin: 20px 0;
+            background: rgba(255, 215, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
         }
         #comprobante {
             margin-top: 10px;
         }
+        button {
+            background-color: gold;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-    <h1>Registro para la Rifa</h1>
+    <h1>💎 Brillantez Joyería - Rifa Online 💎</h1>
+
+    <h2>Registro de Participantes</h2>
     <form id="registroForm">
         <input type="text" id="nombre" placeholder="Tu nombre" required>
         <input type="text" id="cedula" placeholder="Tu cédula" required>
@@ -53,7 +67,7 @@
 
     <div class="pago-info">
         <p><strong>Zelle</strong></p>
-        <p>Correo: ejemplo@email.com</p>
+        <p>Correo: carolscr60@gmail.com</p>
         <button onclick="confirmarPago('Zelle')">Confirmar Pago</button>
     </div>
 
