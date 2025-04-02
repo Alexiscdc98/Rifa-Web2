@@ -186,3 +186,50 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rifa - Métodos de Pago</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .pago-info {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Selecciona tu Método de Pago</h1>
+
+    <div class="pago-info">
+        <p><strong>Pago Móvil (Venezuela)</strong></p>
+        <p>Banco: Banco de Venezuela</p>
+        <p>Cédula: V26774947</p>
+        <p>Teléfono: 0412-6845069</p>
+        <button onclick="confirmarPago('Pago Móvil')">Confirmar Pago</button>
+    </div>
+
+    <div class="pago-info">
+        <p><strong>Binance Pay</strong></p>
+        <button onclick="window.open('https://pay.binance.com/es/', '_blank')">Pagar con Binance</button>
+    </div>
+
+    <div class="pago-info">
+        <p><strong>Zelle</strong></p>
+        <p>Correo: ejemplo@email.com</p>
+        <button onclick="confirmarPago('Zelle')">Confirmar Pago</button>
+    </div>
+
+    <h2>Sube tu captura
