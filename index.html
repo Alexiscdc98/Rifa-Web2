@@ -63,7 +63,7 @@
         <p>Banco: Banco de Venezuela</p>
         <p>Cédula: V26774947</p>
         <p>Teléfono: 0412-6845069</p>
-        <button onclick="confirmarPago('Pago Móvil')">Confirmar Pago</button>
+        <button onclick="confirmarPago()">Confirmar Pago</button>
     </div>
 
     <h2>Sube tu comprobante de pago</h2>
@@ -73,6 +73,8 @@
     </form>
 
     <script>
+        let numerosDisponibles = Array.from({ length: 1000 }, (_, i) => String(i).padStart(3, '0'));
+
         document.getElementById("registroForm").addEventListener("submit", function(event) {
             event.preventDefault();
             
@@ -80,11 +82,14 @@
             const cedula = document.getElementById("cedula").value;
             const telefono = document.getElementById("telefono").value;
             const correo = document.getElementById("correo").value;
-            const cantidad = document.getElementById("cantidad").value;
+            const cantidad = parseInt(document.getElementById("cantidad").value);
             let numeros = [];
 
             for (let i = 0; i < cantidad; i++) {
-                numeros.push(Math.floor(Math.random() * 100) + 1);
+                if (numerosDisponibles.length > 0) {
+                    const indice = Math.floor(Math.random() * numerosDisponibles.length);
+                    numeros.push(numerosDisponibles.splice(indice, 1)[0]);
+                }
             }
 
             document.getElementById("resultado").innerHTML = `
@@ -93,10 +98,19 @@
                 <p>Teléfono registrado: ${telefono}</p>
                 <p>Correo registrado: ${correo}</p>
             `;
+
+            sessionStorage.setItem(correo, JSON.stringify(numeros));
         });
 
-        function confirmarPago(metodo) {
-            alert("Has confirmado tu pago con " + metodo + ". Ahora sube tu comprobante.");
+        function confirmarPago() {
+            const correo = document.getElementById("correo").value;
+            const numeros = JSON.parse(sessionStorage.getItem(correo));
+
+            if (numeros) {
+                alert(`Pago confirmado. Se enviarán tus números (${numeros.join(", ")}) al correo ${correo}.`);
+            } else {
+                alert("No se encontró un registro asociado. Asegúrate de haber generado tu número antes de confirmar el pago.");
+            }
         }
 
         document.getElementById("pagoForm").addEventListener("submit", function(event) {
